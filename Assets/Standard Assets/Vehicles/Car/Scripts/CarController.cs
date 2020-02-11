@@ -63,7 +63,7 @@ namespace UnityStandardAssets.Vehicles.Car
         public float HandBrakeInput { get; private set; }
 
         // Use this for initialization
-        public void Initialize()
+        private void Start()
         {
             m_WheelMeshLocalRotations = new Quaternion[4];
             for (int i = 0; i < 4; i++)
@@ -73,12 +73,11 @@ namespace UnityStandardAssets.Vehicles.Car
             m_WheelColliders[0].attachedRigidbody.centerOfMass = m_CentreOfMassOffset;
 
             m_MaxHandbrakeTorque = float.MaxValue;
-            
 
             m_Rigidbody = GetComponent<Rigidbody>();
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
-
-            originalFriction = m_WheelColliders[1].sidewaysFriction;
+			
+			//originalFriction = m_WheelColliders[1].sidewaysFriction;
         }
 
 

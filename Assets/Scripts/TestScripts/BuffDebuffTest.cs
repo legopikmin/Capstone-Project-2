@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BuffDebuffTest : MonoBehaviour
 {
-    public PlayerManager.PlayerStat stat;
-    public PlayerManager player;
-    public Buff buff;
+    //public PlayerManager.PlayerStat stat;
+    //public PlayerManager player;
+    //public Buff buff;
 
     // Start is called before the first frame update
     void Start()
@@ -19,20 +19,20 @@ public class BuffDebuffTest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.B))
         {
-            Debug.Log("Base value:" + player.GetBaseStatValue(stat));
-            Debug.Log("Current value:" + player.GetCurrentStatValue(stat));
+            //Debug.Log("Base value:" + player.GetBaseStatValue(stat));
+            //Debug.Log("Current value:" + player.GetCurrentStatValue(stat));
         }
 
         if (Input.GetKeyDown(KeyCode.V))
         {
-            player.ApplyBuff(buff);
-            Debug.Log("Buff Applied");
+            //player.ApplyBuff(buff);
+            //Debug.Log("Buff Applied");
         }
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            player.RemoveBuff(buff);
-            Debug.Log("Buff Removed");
+            //player.RemoveBuff(buff);
+            //Debug.Log("Buff Removed");
         }
 
     }

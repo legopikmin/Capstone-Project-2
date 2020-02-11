@@ -36,20 +36,21 @@ public class WeaponManager : MonoBehaviour
     //Controls if you can shoot or not.
     private bool canShoot;
 
-    [HideInInspector] public PlayerManager playerManager;
-    [HideInInspector] public string playerControllerID;
+    //[SerializeField] private PlayerManager playerManager;
+    [SerializeField] private string playerControllerID;
 
     void Update()
     {
         OverheatTimerCheck();
     }
 
-    public void Initialize()
+    public void Start()
     {
         canShoot = true;
         cc = GetComponent<CarController>();
+		playerControllerID = GetComponent<PlayerManager>().GetPlayerID();
 
-        playerControllerID = playerManager.id.ToString();
+        //playerControllerID = playerManager.id.ToString();
     }
 
     //Controls the overheat or cooldown of the shooting

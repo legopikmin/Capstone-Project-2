@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+/*
     /// <summary>
     /// This script is going off the assumption that this script will be attached to the car itself.
     /// IF that is not the case, adjustments will need to be made to the script, mostly around the death method.
@@ -16,60 +17,47 @@ public class PlayerManager : MonoBehaviour
     /// By: Alejandro Muros and Scott P.
     /// Removed unneeded methods and added in the ability for this script to give a reference of itself to the card manager and call a method in the card manager
     /// </summary>
+*/
 
-    public enum PlayerID { P1 = 1, P2 = 2, P3 = 3, P4 = 4 }//ID for controls.
+    private enum PlayerID { P1 = 1, P2 = 2, P3 = 3, P4 = 4 }//ID for controls.
     public enum PlayerState { Mulligan, Waiting, Playing, LocalPause, GlobalPause, Dead }//The status of the player.
-    public enum ColorAffinity { Red, Black, Blue, White, Green }//What color is the player weak too and strong against.
+    //public enum ColorAffinity { Red, Black, Blue, White, Green }//What color is the player weak too and strong against.
 
-    public enum PlayerStat { NullStat, MaxHealth, MaxShield, Mass, AngularDrag, Drag, TopSpeed, DriftingTraction }
+    //public enum PlayerStat { NullStat, MaxHealth, MaxShield, Mass, AngularDrag, Drag, TopSpeed, DriftingTraction }
 
 
     [Header("Player Settings")]
-    public PlayerID id;
+    [SerializeField] private PlayerID id;
     public PlayerState currentState;
-
-    [Header("Health")]
-    public float currentHealth;
-
     
-    [SerializeField] List<Buff> activeBuffs; //Contains all of the active buffs and debuffs on the player
-    List<Buff> buffsToRemove; // A list of buffs to remove on FixedUpdate, this is used since buffs could not be removed while iterating through them
-
-    [Header("Energy")]
-    public int currentEnergy;
-    [SerializeField] int currentMaxEnergy; //the max energy a player can currently have. This can be increased.
-    [SerializeField] int intitialMaxEnergy = 1; //sets the initial value for the currentMaxEnergy variable
-    [SerializeField] int absoluteMaxEnergy = 9; //the max value the currentMaxEnergy variable can increase to
+    //[SerializeField] List<Buff> activeBuffs; //Contains all of the active buffs and debuffs on the player
+    //List<Buff> buffsToRemove; // A list of buffs to remove on FixedUpdate, this is used since buffs could not be removed while iterating through them
 
     public bool[] checkpointsCleared;
 
-    [Header("Color Affinity")]
-    [SerializeField] ColorAffinity colorAdvantage;
-    [SerializeField] ColorAffinity colorDisadvantage;
-
-    public CardManager cardManager;
-    public WeaponManager weaponManager;
-	public CameraLayerSetup camSetup;
-
-    public VehicleData vehicleData;
+    //[Header("Color Affinity")]
+    //[SerializeField] ColorAffinity colorAdvantage;
+    //[SerializeField] ColorAffinity colorDisadvantage;
 
     public TMP_Text winnerMessage;
 
-    public Slider healthBar;
-    public Slider energyBar;
-    public TMP_Text healthText;
-    public TMP_Text energyText;
 
-    /// <summary>
-    /// Scripts are not in the build yet. Placeholders until they get implemented into the build.
-    /// </summary>
-    //[Header("Script References")]
-    //public VehicleManager vehicleManager;
-    public TempVehicleManager vMan; //temp dummy manager to pass inputs until real vehicle manager is made
-                                    //public WeaponManager weaponManager;
+		//sets the player ID, called by GameManager.cs		-JAM
+	public void SetPlayerID(int myID){
+		id = myID;
+	}
+		//returns the player ID, called upon by other scripts	-JAM
+	public int GetPlayerID(){
+		return id;
+	}
 
+	void Update(){
+		if(Input.GetButtonDown("Start" + id))	//-JAM
+		{
+			Debug.Log("Player ID: " + id);
+		}
+	}
 
-	
     void FixedUpdate()
     {
         //Check if there are any buffs left to remove
@@ -100,9 +88,6 @@ public class PlayerManager : MonoBehaviour
 
     public void Initialize(/*Add paramerters once game setup is designed*/ int playerNum /*Game Manager passes in the number of the player when instantiating the player manager*/) //this takes the place of start
     {
-        currentHealth = vehicleData.maxHealth;
-        currentEnergy = 0;
-        currentMaxEnergy = intitialMaxEnergy;
         currentState = PlayerState.Mulligan;
 
         checkpointsCleared = new bool[GameManager.gameManager.checkpoints.Count];
@@ -111,64 +96,15 @@ public class PlayerManager : MonoBehaviour
         cardManager.playerManager = this; //gives the card manager a reference to itself
         cardManager.Initialize(); //calls the initialize method in the card manager
 
-        vMan.playerManager = this;
-        vMan.Initialize();
+        //vMan.playerManager = this;
+        //vMan.Initialize();
 
-        weaponManager.playerManager = this;
-        weaponManager.Initialize();
+        //weaponManager.playerManager = this;
+        //weaponManager.Initialize();
 
         buffsToRemove = new List<Buff>();
 		
 		camSetup.SetupCamera(id.ToString());
-
-        healthBar.value = (currentHealth / GetCurrentStatValue(PlayerStat.MaxHealth));
-        healthText.text = currentHealth.ToString();
-        energyBar.value = (currentEnergy / currentMaxEnergy);
-        energyText.text = currentEnergy.ToString();
-    }
-
-    public void ApplyDamage(float damage)
-    {
-        currentHealth -= damage;
-        healthBar.value = (currentHealth / GetCurrentStatValue(PlayerStat.MaxHealth));
-        healthText.text = currentHealth.ToString();
-        if (currentHealth <= 0)
-        {
-            Death();
-        }
-    }
-
-    public void RestoreHealth(float healthGain)
-    {
-        currentHealth += healthGain;
-        if (currentHealth > GetCurrentStatValue(PlayerStat.MaxHealth))
-        {
-            currentHealth = GetCurrentStatValue(PlayerStat.MaxHealth);
-            healthBar.value = (currentHealth / GetCurrentStatValue(PlayerStat.MaxHealth));
-            healthText.text = currentHealth.ToString();
-        }
-    }
-
-    public void GainEnergy(int amount)
-    {
-        currentEnergy += amount;
-        if (currentEnergy > currentMaxEnergy)
-        {
-            currentEnergy = currentMaxEnergy;
-        }
-        energyBar.value = (currentEnergy / currentMaxEnergy);
-        energyText.text = currentEnergy.ToString();
-    }
-
-    public void ReduceEnergy(int amount)
-    {
-        currentEnergy -= amount;
-        if (currentEnergy < 0)
-        {
-            currentEnergy = 0;
-        }
-        energyBar.value = (currentEnergy / currentMaxEnergy);
-        energyText.text = currentEnergy.ToString();
     }
 
     public void ClearCheckpoint(int checkpointID)
@@ -226,16 +162,7 @@ public class PlayerManager : MonoBehaviour
         energyText.text = currentEnergy.ToString();
     }
 
-    private void Death()
-    {
-        currentState = PlayerState.Dead;
-        //TODO UI Changes
-        //TODO Death affects
-        GameManager.gameManager.RemovePlayer(this.gameObject);
-        gameObject.SetActive(false);
-    }
-
-
+/*
     #region Buff/Debuff and Stats
     /// <summary>
     /// Gets the base value of the passed in stat without any modifications
@@ -318,5 +245,6 @@ public class PlayerManager : MonoBehaviour
         buffsToRemove.Add(b);
     }
     #endregion
+*/
 }
 

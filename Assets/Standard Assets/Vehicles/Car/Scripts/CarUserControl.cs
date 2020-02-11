@@ -8,7 +8,7 @@ namespace UnityStandardAssets.Vehicles.Car
     public class CarUserControl : MonoBehaviour
     {
         private CarController m_Car; // the car controller we want to use
-        public string playerControllerID = "P1"; // player id string to be added to end of input name to change it to the proper player input
+        private string playerControllerID = "P1"; // player id string to be added to end of input name to change it to the proper player input
 
         public void Initialize()
         {

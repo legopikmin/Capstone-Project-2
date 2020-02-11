@@ -32,7 +32,7 @@ public class HandManager : MonoBehaviour
     [SerializeField] private CardObject[] storedObject = new CardObject[3];//Array for the stored gameobjects that is needed to delete the gameobject when we replace slotted cards.
     [SerializeField] private CardData toBeSlotted;//stored area for a card to be slotted
     [SerializeField] private bool slottingInProgress = false;
-    [SerializeField] private float playerEnergy = 10;//Energy placeholder to test code, may need to be changed for the final project.
+    //[SerializeField] private float playerEnergy = 10;//Energy placeholder to test code, may need to be changed for the final project.
     public GameObject slottingUI; //Alex; made this to control the slotting UI that contains the slotting message. (11/13/2019)
     [SerializeField][Range(0, 0.4f)]
     private float slotCardScale = .3f;//The scale for card objects once they are slotted
