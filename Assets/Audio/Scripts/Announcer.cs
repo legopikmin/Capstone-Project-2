@@ -44,7 +44,7 @@ public class Announcer : MonoBehaviour
     private void PlayAudio()
     {
         int chosenClip = Random.Range(0, clips.Count); //chooses a number between 0 and the value of the max number of audio clips in clips 
-
+        aud.clip = clips[chosenClip];//displays the clip being played
         aud.PlayOneShot(clips[chosenClip]); //this will play a audio clip based on the chosenClips value
     }
 }
