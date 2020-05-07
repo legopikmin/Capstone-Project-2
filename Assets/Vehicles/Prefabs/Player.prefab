@@ -1483,6 +1483,26 @@ PrefabInstance:
       propertyPath: m_MaxDriftSteerAngle
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 982385347, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982385347, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982385347, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982385347, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 982385347, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.30070576
@@ -1925,9 +1945,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
         type: 3}
+      propertyPath: deck.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
       propertyPath: deckCount
       value: 
       objectReference: {fileID: 8766634734450053779}
+    - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
+      propertyPath: deck.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 473e279849f803f42bf60648e5281f46,
+        type: 2}
+    - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
+      propertyPath: deck.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 473e279849f803f42bf60648e5281f46,
+        type: 2}
+    - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
+      propertyPath: deck.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 473e279849f803f42bf60648e5281f46,
+        type: 2}
+    - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
+      propertyPath: deck.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 473e279849f803f42bf60648e5281f46,
+        type: 2}
+    - target: {fileID: 68035481111870093, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
+      propertyPath: deck.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 473e279849f803f42bf60648e5281f46,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 555ad755beb515e4ca24e37f08423736, type: 3}
 --- !u!114 &2576772043392289398 stripped
@@ -1959,11 +2014,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CarCameraRig
-      objectReference: {fileID: 0}
-    - target: {fileID: 7515474825274422229, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7515474824482560709, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
         type: 3}
@@ -2019,6 +2069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515474825274422229, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7515474824482560760, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
         type: 3}
@@ -2183,6 +2238,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 113695445261399455, guid: 1a10d057b987e234f9fc784b0a91fa31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 113695444757964598, guid: 1a10d057b987e234f9fc784b0a91fa31,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 113695444510424723, guid: 1a10d057b987e234f9fc784b0a91fa31,
         type: 3}
       propertyPath: m_RenderMode
@@ -2197,16 +2262,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PlaneDistance
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 113695445261399455, guid: 1a10d057b987e234f9fc784b0a91fa31,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 113695444757964598, guid: 1a10d057b987e234f9fc784b0a91fa31,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a10d057b987e234f9fc784b0a91fa31, type: 3}

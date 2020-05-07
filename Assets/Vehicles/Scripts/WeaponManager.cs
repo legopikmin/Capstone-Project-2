@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
 
+/// <summary>
+/// Connery Ray 05/07/2020
+/// added ability to change shot rotation based on the shot being fired
+/// </summary>
+
 public class WeaponManager : MonoBehaviour
 {
     //Bullet prefab
@@ -82,16 +87,28 @@ public class WeaponManager : MonoBehaviour
     
     public void FireProjectile(GameObject prefab, float damage, float lifespan, float speed)
     {
+
         if(Time.time >= fire)
         {
             fire = Time.time + fireDelay;
-            GameObject newObject = Instantiate(prefab, fireLocation.position, fireLocation.rotation);
-            Projectile newProjectile = newObject.GetComponent<Projectile>();
+			GameObject newObject = Instantiate(prefab, fireLocation.position, fireLocation.rotation);
+			Projectile newProjectile = newObject.GetComponent<Projectile>();
 
             //Setup all the parameters for the projectile
             newProjectile.Initialize(playerManager, damage, projectileLifetime);
-            //Actually 'shoot' the projectile
-            newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+
+			//Actually 'shoot' the projectile
+			//newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+			if(newProjectile.hasPulse == true)
+			{
+				newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+				newObject.GetComponent<Rigidbody>().AddForce(0, 10, 0, ForceMode.Impulse);
+				Debug.Log("Force Applied");
+			}
+			else
+			{
+				newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+			}
         }
     }
 

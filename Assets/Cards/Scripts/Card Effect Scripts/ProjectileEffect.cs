@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Connery Ray 05/07/2020
+/// Added ability to specify projectile rotation
+/// </summary>
+
 [CreateAssetMenu(fileName = "New Projectile Effect", menuName = "Projectile Effect")]
 public class ProjectileEffect : Effect
 {
