@@ -55,16 +55,16 @@ public class WeaponManager : MonoBehaviour
     //Controls the overheat or cooldown of the shooting
     private void OverheatTimerCheck()
     {
-        if(Input.GetButton("RightBumper" + playerControllerID) && canShoot == true)
+        if (Input.GetButton("RightBumper" + playerControllerID) && canShoot == true)
         {
             FireProjectile(projectilePrefab, damage, projectileLifetime, projectileSpeed);
             shotOverheatLimit += increaseRate * Time.deltaTime;
-            if(shotOverheatLimit >= maxShootTimer)
+            if (shotOverheatLimit >= maxShootTimer)
             {
                 canShoot = false;
             }
         }
-        else if(canShoot == false)
+        else if (canShoot == false)
         {
             Mathf.Clamp(shotOverheatLimit, 0, maxShootTimer);
             shotOverheatLimit -= decreaseRate * Time.deltaTime;
@@ -73,28 +73,34 @@ public class WeaponManager : MonoBehaviour
                 canShoot = true;
             }
         }
-        else if(canShoot == true && shotOverheatLimit > 0)
+        else if (canShoot == true && shotOverheatLimit > 0)
         {
             shotOverheatLimit -= decreaseRate * Time.deltaTime;
         }
     }
 
-    
+
     public void FireProjectile(GameObject prefab, float damage, float lifespan, float speed)
     {
-        if(Time.time >= fire)
+        if (Time.time >= fire)
         {
             fire = Time.time + fireDelay;
             GameObject newObject = Instantiate(prefab, fireLocation.position, fireLocation.rotation);
-            Projectile newProjectile = newObject.GetComponent<Projectile>();
+            if (newObject.GetComponent<Projectile>() != null)
+            {
+                Projectile newProjectile = newObject.GetComponent<Projectile>();
 
-            //Setup all the parameters for the projectile
-            newProjectile.Initialize(playerManager, damage, projectileLifetime);
-            //Actually 'shoot' the projectile
-            newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+                //Setup all the parameters for the projectile
+                newProjectile.Initialize(playerManager, damage, projectileLifetime);
+                //Actually 'shoot' the projectile
+                newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+            }
+
+            if (newObject.GetComponent<LockOn>() != null)
+            {
+                newObject.GetComponent<LockOn>().Initialize(transform, damage, lifespan, speed);
+            }
         }
     }
-
-
-    
 }
+
