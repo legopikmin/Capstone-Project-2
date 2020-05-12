@@ -106,29 +106,33 @@ public class WeaponManager : MonoBehaviour
             //reset the delay between shots
             fire = Time.time + fireDelay;
 			GameObject newObject = Instantiate(prefab, fireLocation.position, fireLocation.rotation);
-			Projectile newProjectile = newObject.GetComponent<Projectile>();
 
-            //Setup all the parameters for the projectile
-            newProjectile.Initialize(playerManager, damage, projectileLifetime);
+            if(newObject.GetComponent<Projectile>() != null)
+            {
+                Projectile newProjectile = newObject.GetComponent<Projectile>();
 
-			//Actually 'shoot' the projectile
-			//newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
-			if(newProjectile.hasPulse == true)
-			{
-				newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
-				newObject.GetComponent<Rigidbody>().AddForce(0, 10, 0, ForceMode.Impulse);
-				Debug.Log("Force Applied");
-			}
-			else
-			{
-				newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
-			}
+                //Setup all the parameters for the projectile
+                newProjectile.Initialize(playerManager, damage, projectileLifetime);
+
+                //Actually 'shoot' the projectile
+                //newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+                if (newProjectile.hasPulse == true)
+                {
+                    newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+                    newObject.GetComponent<Rigidbody>().AddForce(0, 10, 0, ForceMode.Impulse);
+                    Debug.Log("Force Applied");
+                }
+                else
+                {
+                    newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
+                }
+            }
+
+            //alejandros lock on code
+            if (newObject.GetComponent<LockOn>() != null)
+            {
+                newObject.GetComponent<LockOn>().Initialize(transform, damage, lifespan, speed);
+            }
         }
-
-        //alejandros lock on code
-        /*if(newObject.GetComponent<LockOn>() != null)
-        {
-            newObject.GetComponent<LockOn>().Initialize(transform, damage, lifespan, speed);
-        }*/
     } 
 }
