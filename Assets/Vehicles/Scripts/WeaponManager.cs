@@ -56,6 +56,7 @@ public class WeaponManager : MonoBehaviour
         cc = GetComponent<CarController>();
         
         //set controller id
+        //playerControllerID = playerManager.GetID();//how the id should be called if the manager was fixed
         playerControllerID = playerManager.id.ToString();
     }
 
