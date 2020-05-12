@@ -122,10 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7eb94f0bac7e584796df07c9ba598da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashDamage: 0
+  splashDamage: 1
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   splashDamageRange: 5
   damage: 10
   targetRange: 5000
