@@ -43,16 +43,16 @@ public class HandManager : MonoBehaviour
     public int selectedCardIndex;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] Transform[] cardPositions;
-    public HandState currentState = HandState.Mulligan;
+    public HandState currentState = HandState.Match; //should be mulligan not match
     public CardManager cardManager;
 
-    [Header("Mulligan Variables")]
-    public bool[] cardSelectedForMulligan;
-    [SerializeField] int maxMulliganAmount = 1;
-    [SerializeField] float mulliganDuration = 30; //THIS SHOULD BE MOVED TO MATCH MANAGER ONCE IT IS MADE
-    public float mulliganCountdown; //THIS SHOULD BE MOVED TO MATCH MANAGER ONCE IT IS MADE
-    public TMP_Text mulliganCountdownText;
-    public TMP_Text mulliganInstructionText;
+    //[Header("Mulligan Variables")]
+    //public bool[] cardSelectedForMulligan;
+    //[SerializeField] int maxMulliganAmount = 1;
+    //[SerializeField] float mulliganDuration = 30; //THIS SHOULD BE MOVED TO MATCH MANAGER ONCE IT IS MADE
+    //public float mulliganCountdown; //THIS SHOULD BE MOVED TO MATCH MANAGER ONCE IT IS MADE
+    //public TMP_Text mulliganCountdownText;
+    //public TMP_Text mulliganInstructionText;
 
     #endregion
 
@@ -93,74 +93,74 @@ public class HandManager : MonoBehaviour
 
         switch (currentState)
         {
-            case HandState.Mulligan:
-                if (Input.GetButtonDown("ButtonA" + cardManager.playerControllerID))
-                {
-                    ToggleMulliganSelection();
-                }
+            //case HandState.Mulligan:
+            //    if (Input.GetButtonDown("ButtonA" + cardManager.playerControllerID))
+            //    {
+            //        ToggleMulliganSelection();
+            //    }
 
-                if (Input.GetAxis("DPadVertical" + cardManager.playerControllerID) == -1)
-                {
-                    if (canDiscard)
-                    {
-                        discardHoldTimer += Time.deltaTime;
-                        if (discardHoldTimer > discardHoldDuration)
-                        {
-                            //Discard all of the selected cards
-                            for (int i = initialHandSize - 1; i >= 0; i--)
-                            {
-                                if (cardSelectedForMulligan[i])
-                                {
-                                    cardSelectedForMulligan[i] = false;
-                                    DiscardCard(i);
-                                }
-                            }
+            //    if (Input.GetAxis("DPadVertical" + cardManager.playerControllerID) == -1)
+            //    {
+            //        if (canDiscard)
+            //        {
+            //            discardHoldTimer += Time.deltaTime;
+            //            if (discardHoldTimer > discardHoldDuration)
+            //            {
+            //                //Discard all of the selected cards
+            //                for (int i = initialHandSize - 1; i >= 0; i--)
+            //                {
+            //                    if (cardSelectedForMulligan[i])
+            //                    {
+            //                        cardSelectedForMulligan[i] = false;
+            //                        DiscardCard(i);
+            //                    }
+            //                }
 
-                            //Draw cards to replace the discarded ones
-                            for (int i = cardsInHand.Count; i < initialHandSize; i++)
-                            {
-                                AddCard(myDeck.DrawCard());
-                            }
+            //                //Draw cards to replace the discarded ones
+            //                for (int i = cardsInHand.Count; i < initialHandSize; i++)
+            //                {
+            //                    AddCard(myDeck.DrawCard());
+            //                }
 
-                            discardHoldTimer = 0;
-                            canDiscard = false;
+            //                discardHoldTimer = 0;
+            //                canDiscard = false;
 
-                            currentState = HandState.Ready;
-                        }
-                    }
-                }
-                else
-                {
-                    //They are not pressing 'discard', so reset the timer
-                    discardHoldTimer = 0;
-                    canDiscard = true;
-                }
+            //                currentState = HandState.Ready;
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //They are not pressing 'discard', so reset the timer
+            //        discardHoldTimer = 0;
+            //        canDiscard = true;
+            //    }
 
-                //Reduce the countdown
-                mulliganCountdown -= Time.deltaTime;
-                mulliganCountdownText.text = ((int)mulliganCountdown).ToString();
-                //If the countdown is at 0, disable mulligans and start the match
-                if (mulliganCountdown <= 0)
-                {
-                    currentState = HandState.Match;
-                    UpdateCardPositions();
-                    mulliganCountdownText.gameObject.SetActive(false);
-                    mulliganInstructionText.gameObject.SetActive(false);
-                }
-                break;
+            //    //Reduce the countdown
+            //    mulliganCountdown -= Time.deltaTime;
+            //    mulliganCountdownText.text = ((int)mulliganCountdown).ToString();
+            //    //If the countdown is at 0, disable mulligans and start the match
+            //    if (mulliganCountdown <= 0)
+            //    {
+            //        currentState = HandState.Match;
+            //        UpdateCardPositions();
+            //        mulliganCountdownText.gameObject.SetActive(false);
+            //        mulliganInstructionText.gameObject.SetActive(false);
+            //    }
+            //    break;
 
-            case HandState.Ready:
-                //Reduce the countdown
-                mulliganCountdown -= Time.deltaTime;
-                mulliganCountdownText.text = ((int)mulliganCountdown).ToString();
-                //If the countdown is at 0, disable mulligans and start the match
-                if (mulliganCountdown <= 0)
-                {
-                    currentState = HandState.Match;
-                    mulliganCountdownText.gameObject.SetActive(false);
-                    mulliganInstructionText.gameObject.SetActive(false);
-                }
-                break;
+            //case HandState.Ready:
+            //    //Reduce the countdown
+            //    mulliganCountdown -= Time.deltaTime;
+            //    mulliganCountdownText.text = ((int)mulliganCountdown).ToString();
+            //    //If the countdown is at 0, disable mulligans and start the match
+            //    if (mulliganCountdown <= 0)
+            //    {
+            //        currentState = HandState.Match;
+            //        mulliganCountdownText.gameObject.SetActive(false);
+            //        mulliganInstructionText.gameObject.SetActive(false);
+            //    }
+            //    break;
 
 
             case HandState.Match:
@@ -269,7 +269,7 @@ public class HandManager : MonoBehaviour
     {
         //Initialize Arrays
         cardsInHand = new List<CardObject>();
-        cardSelectedForMulligan = new bool[initialHandSize];
+        //cardSelectedForMulligan = new bool[initialHandSize];
 
         //Draw initial cards from deck
         for (int i = 0; i < initialHandSize; i++)
@@ -278,8 +278,8 @@ public class HandManager : MonoBehaviour
         }
 
         //Start mulliganing
-        mulliganCountdown = mulliganDuration;
-        currentState = HandState.Mulligan;
+        //mulliganCountdown = mulliganDuration;
+        currentState = HandState.Match;   //should be mulligan not match
     }
 
     /// <summary>
@@ -587,16 +587,16 @@ public class HandManager : MonoBehaviour
     /// <summary>
     /// Switches the currently highlighted card between being mulliganed or not.
     /// </summary>
-    public void ToggleMulliganSelection()
-    {
-        //Make sure we aren't selecting more than the maxMulliganAmount
-        if (cardSelectedForMulligan[selectedCardIndex] || cardSelectedForMulligan.Where(b => b == true).Count() < maxMulliganAmount)
-        {
-            //Toggle whether the card is selected or not, and move it up or down as necessary
-            cardSelectedForMulligan[selectedCardIndex] = !cardSelectedForMulligan[selectedCardIndex];
-            GetSelectedCard().transform.position = cardPositions[selectedCardIndex].position + (cardSelectedForMulligan[selectedCardIndex] ? new Vector3(0, .5f, 0) : Vector3.zero);
-        }
-    }
+    //public void ToggleMulliganSelection()
+    //{
+    //    //Make sure we aren't selecting more than the maxMulliganAmount
+    //    if (cardSelectedForMulligan[selectedCardIndex] || cardSelectedForMulligan.Where(b => b == true).Count() < maxMulliganAmount)
+    //    {
+    //        //Toggle whether the card is selected or not, and move it up or down as necessary
+    //        cardSelectedForMulligan[selectedCardIndex] = !cardSelectedForMulligan[selectedCardIndex];
+    //        GetSelectedCard().transform.position = cardPositions[selectedCardIndex].position + (cardSelectedForMulligan[selectedCardIndex] ? new Vector3(0, .5f, 0) : Vector3.zero);
+    //    }
+    //}
 
     #endregion
 }
