@@ -1415,10 +1415,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8663442098816643016}
     m_Modifications:
-    - target: {fileID: 100042, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
-      propertyPath: m_Name
-      value: Car
-      objectReference: {fileID: 0}
     - target: {fileID: 307728896, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
       propertyPath: projectileSpeed
       value: 75
@@ -1470,6 +1466,10 @@ PrefabInstance:
     - target: {fileID: 400050, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
+      propertyPath: m_Name
+      value: Car
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0e7ee4df08df88c4880f43398f9ad2c2, type: 3}
       propertyPath: driftingTraction
@@ -1748,11 +1748,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1186397480322808223}
     m_Modifications:
-    - target: {fileID: 6627102055705560928, guid: 555ad755beb515e4ca24e37f08423736,
-        type: 3}
-      propertyPath: m_Name
-      value: CardManager
-      objectReference: {fileID: 0}
     - target: {fileID: 6627102055705560934, guid: 555ad755beb515e4ca24e37f08423736,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1807,6 +1802,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627102055705560928, guid: 555ad755beb515e4ca24e37f08423736,
+        type: 3}
+      propertyPath: m_Name
+      value: CardManager
       objectReference: {fileID: 0}
     - target: {fileID: 6627102056953419081, guid: 555ad755beb515e4ca24e37f08423736,
         type: 3}
@@ -1955,11 +1955,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8663442098816643016}
     m_Modifications:
-    - target: {fileID: 7515474824482560761, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
-        type: 3}
-      propertyPath: m_Name
-      value: CarCameraRig
-      objectReference: {fileID: 0}
     - target: {fileID: 7515474825274422229, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -2020,6 +2015,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7515474824482560761, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
+        type: 3}
+      propertyPath: m_Name
+      value: CarCameraRig
+      objectReference: {fileID: 0}
     - target: {fileID: 7515474824482560760, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
         type: 3}
       propertyPath: m_Target
@@ -2039,6 +2039,11 @@ PrefabInstance:
         type: 3}
       propertyPath: closestDistance
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515474825274422216, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2d3f477c3e29f4eb2d981e2ae6a942, type: 3}
