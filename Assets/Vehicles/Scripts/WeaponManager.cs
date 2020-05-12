@@ -112,5 +112,11 @@ public class WeaponManager : MonoBehaviour
             //Actually 'shoot' the projectile
             newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
         }
+
+        //alejandros lock on code
+        /*if(newObject.GetComponent<LockOn>() != null)
+        {
+            newObject.GetComponent<LockOn>().Initialize(transform, damage, lifespan, speed);
+        }*/
     } 
 }
