@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
 
+//edited 5/12/20 by Jordan
+
 public class WeaponManager : MonoBehaviour
 {
     //Bullet prefab
@@ -18,7 +20,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private float projectileLifetime;
 
     //If it reaches this number, it must reset to zero before you can fire again.
-    [SerializeField] private float shotOverheatLimit;
+    [SerializeField] private float overheatAmount;
     //How much shootTimer increase
     [Range(0, 1)]
     [SerializeField] private float increaseRate;
@@ -41,50 +43,66 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
+        //constantly check if gun can shoot
         OverheatTimerCheck();
     }
 
+    //initialize should be start but playermanager hasnt been fixed so cant be changed yet
     public void Initialize()
     {
+        //gun should be able to shoot at start of game
         canShoot = true;
+        //get car controller so that car velocity can be matched
         cc = GetComponent<CarController>();
-
+        
+        //set controller id
         playerControllerID = playerManager.id.ToString();
     }
 
     //Controls the overheat or cooldown of the shooting
     private void OverheatTimerCheck()
     {
+        //check if fire button is pressed while shooting enabled
         if(Input.GetButton("RightBumper" + playerControllerID) && canShoot == true)
         {
+            //if shooting is nabled and button is pressed, spawn projectile
             FireProjectile(projectilePrefab, damage, projectileLifetime, projectileSpeed);
-            shotOverheatLimit += increaseRate * Time.deltaTime;
-            if(shotOverheatLimit >= maxShootTimer)
+            overheatAmount += increaseRate * Time.deltaTime;
+            //check overheat amount to see if gun can keep shooting, if not, disable shooting
+            if(overheatAmount >= maxShootTimer)
             {
                 canShoot = false;
             }
         }
+        //if not actively shooting, check if shooting is disabled
         else if(canShoot == false)
         {
-            Mathf.Clamp(shotOverheatLimit, 0, maxShootTimer);
-            shotOverheatLimit -= decreaseRate * Time.deltaTime;
-            if (shotOverheatLimit <= 0)
+            //if shooting is disabled, slowly reduced overheat amount to 0, then enable shooting
+            Mathf.Clamp(overheatAmount, 0, maxShootTimer);
+            overheatAmount -= decreaseRate * Time.deltaTime;
+            if (overheatAmount <= 0)
             {
                 canShoot = true;
             }
         }
-        else if(canShoot == true && shotOverheatLimit > 0)
+        //if not actively shooting and shooting is not disabled, check if overheat amount is more than 0
+        else if(canShoot == true && overheatAmount > 0)
         {
-            shotOverheatLimit -= decreaseRate * Time.deltaTime;
+            //if overheat amount is more than 0, slowly reduce it untill its <= 0
+            overheatAmount -= decreaseRate * Time.deltaTime;
         }
     }
 
     
     public void FireProjectile(GameObject prefab, float damage, float lifespan, float speed)
     {
+        //check if enough time has passed between shots
         if(Time.time >= fire)
         {
+            //reset the delay between shots
             fire = Time.time + fireDelay;
+            
+            //create new projectile to be fired
             GameObject newObject = Instantiate(prefab, fireLocation.position, fireLocation.rotation);
             Projectile newProjectile = newObject.GetComponent<Projectile>();
 
@@ -93,8 +111,5 @@ public class WeaponManager : MonoBehaviour
             //Actually 'shoot' the projectile
             newObject.GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward * (projectileSpeed + cc.CurrentSpeed));
         }
-    }
-
-
-    
+    } 
 }
