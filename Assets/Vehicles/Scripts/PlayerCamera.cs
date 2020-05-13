@@ -75,14 +75,14 @@ public class PlayerCamera : MonoBehaviour
         currentYRotation = cameraTransform.localEulerAngles.y;
          
         //check if new camera rotation exceeds x rotation limits. If so, change the rotation back to its limit value.
-        if (cameraTransform.localEulerAngles.x > xRotationUpperLimit)
+        /*if (cameraTransform.localEulerAngles.x > xRotationUpperLimit)
         {
             cameraTransform.localEulerAngles = new Vector3(xRotationUpperLimit, currentYRotation, 0);
 
         } else if (cameraTransform.localEulerAngles.x < xRotationLowerLimit)
         {
             cameraTransform.localEulerAngles = new Vector3(xRotationLowerLimit, currentYRotation, 0);
-        }
+        }*/
 
         //now that we know the x value is correct, save it in case z rotation needs to be fixed
         currentXRotation = cameraTransform.localEulerAngles.x;
